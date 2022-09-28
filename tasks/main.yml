@@ -1,0 +1,24 @@
+---
+- name: Install Required Packages
+  import_tasks: install.yml
+  tags: ad_install
+
+- name: Configure realmd
+  import_tasks: config.yml
+  tags: ad_config
+
+- name: Join domain
+  import_tasks: join.yml
+  tags: ad_join
+
+- name: Configure Session
+  import_tasks: session.yml
+  tags: ad_session
+
+- name: SSHD config
+  import_tasks: sshd.yml
+  tags: ad_sshd
+
+- name: Finish config
+  import_tasks: finish_config.yml
+  tags: ad_end

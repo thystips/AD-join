@@ -1,0 +1,30 @@
+---
+- name: Copy realmd.conf
+  ansible.builtin.template:
+    src: realmd.conf.j2
+    dest: /etc/realmd.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart Realmd
+  tags: ad_realmd_conf_add
+
+- name: Copy krb5.conf
+  ansible.builtin.template:
+    src: krb5.conf.j2
+    dest: /etc/krb5.conf
+    backup: true
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart Realmd
+  tags: ad_realmd_kerberos_conf_add
+
+- name: Create a kerberos sub directory
+  ansible.builtin.file:
+    path: /etc/krb5.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  tags: ad_realmd_kerberos_conf_add

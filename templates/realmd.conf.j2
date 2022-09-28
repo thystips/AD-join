@@ -1,0 +1,15 @@
+[active-directory]
+default-client = sssd
+os-name = {{ ansible_distribution }}
+os-version = {{ ansible_distribution_version }}
+
+[service]
+automatic-install = yes
+
+[users]
+default-home = {{ ad_home_dir }}
+default-shell = {{ ad_default_shell }}
+
+[{{ ad_domain }}]
+user-principle = yes
+fully-qualified-names = no

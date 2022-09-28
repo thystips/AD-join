@@ -1,0 +1,20 @@
+# - name: Fix kerberos config
+#   ansible.builtin.template:
+#     src: krb5.conf.j2
+#     dest: /etc/krb5.conf
+#     backup: true
+#     owner: root
+#     group: root
+#     mode: 0644
+#   tags: ad_realmd_kerberos_conf_add
+
+- name: Reboot if required
+  ansible.builtin.reboot:
+    msg: "Reboot initiated by Ansible for AD join"
+    pre_reboot_delay: 30
+    reboot_timeout: 300
+    test_command: uptime
+    connect_timeout: 5
+  when: not realm_list_results.stdout
+  tags:
+    - ad_join_reboot

@@ -1,0 +1,26 @@
+[sssd]
+domains = {{ ad_domain }}
+config_file_version = 2
+
+[domain/{{ ad_domain }}]
+ad_domain = {{ ad_domain }}
+krb5_realm = {{ ad_realm }}
+realmd_tags = manages-system joined-with-adcli
+cache_credentials = True
+id_provider = ad
+krb5_store_password_if_offline = True
+default_shell = {{ ad_default_shell }}
+ldap_id_mapping = True
+use_fully_qualified_names = False
+fallback_homedir = {{ ad_home_dir }}
+access_provider = simple
+{% if ad_permit_groups is defined and ad_permit_groups != [] %}
+simple_allow_groups = {% for group in ad_permit_groups %}{{ group }}{% if not loop.last %}, {% endif %}{% endfor %}
+{% endif %}
+
+auth_provider = ad
+chpass_provider = ad
+ldap_schema = ad
+dyndns_update = false
+
+ad_gpo_access_control = permissive

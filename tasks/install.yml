@@ -1,0 +1,6 @@
+- name: Install packages
+  ansible.builtin.package:
+    name: "{{ ad_pkgs }}"
+    state: present
+  tags:
+    - ad_package_add

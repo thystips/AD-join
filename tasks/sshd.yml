@@ -1,0 +1,21 @@
+---
+- name: Copy sshd conf
+  ansible.builtin.template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart SSHD
+  when: ad_config_ssh
+  tags: ad_session_sshd_add
+
+- name: Copy ssh banner
+  ansible.builtin.template:
+    src: banner.j2
+    dest: "{{ banner_file }}"
+    owner: root
+    group: root
+    mode: 0644
+  when: ad_ssh_banner
+  tags: ad_session_sshd_banner_add

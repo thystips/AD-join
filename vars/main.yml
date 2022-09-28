@@ -1,0 +1,19 @@
+sftp_server_location: /usr/lib/openssh/sftp-server
+
+ad_pkgs:
+ - sssd
+ - sssd-tools
+ - realmd
+ - oddjob
+ - oddjob-mkhomedir
+ - packagekit
+ - adcli
+ - samba-common-bin
+ - krb5-user
+ - libnss-ldap
+ - libpam-ldap
+ - ldap-utils
+ - libnss-sss
+ - libpam-sss
+
+banner_file: "/etc/ssh/banner"

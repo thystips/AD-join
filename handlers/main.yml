@@ -1,0 +1,30 @@
+---
+- name: Restart Realmd
+  ansible.builtin.service:
+    name: realmd
+    state: restarted
+  tags: ad_service_realmd_restart
+
+- name: Restart SSSD
+  ansible.builtin.service:
+    name: sssd
+    state: restarted
+  tags: ad_service_sssd_restart
+
+- name: Restart apparmor
+  ansible.builtin.service:
+    name: apparmor
+    state: restarted
+  tags: ad_service_sssd_restart
+
+- name: Restart SSHD
+  ansible.builtin.service:
+    name: sshd
+    state: restarted
+  tags: ad_service_sshd_restart
+
+- name: Restart ODDJOBD
+  ansible.builtin.service:
+    name: oddjobd
+    state: restarted
+  tags: ad_service_sshd_restart

@@ -1,0 +1,29 @@
+galaxy_info:
+  author: ThysTips
+  description: Join Ubuntu machine to Active Directory
+  company: thystips
+
+  issue_tracker_url: https://github.com/thystips/AD-join/issues
+
+  license: GPL-3.0-only
+
+  min_ansible_version: "2.1"
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - "jammy"
+        - "focal"
+    - name: Debian
+      versions:
+        - "bullseye"
+        - "buster"
+
+  galaxy_tags: 
+    - active_directory
+    - active-directory
+    - ad
+    - sss
+    - realmd
+    - debian
+    - ubuntu

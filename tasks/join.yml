@@ -1,0 +1,43 @@
+- name: Discover realm
+  ansible.builtin.command: /bin/bash -c "/usr/sbin/realm discover {{ ad_realm }}"
+  register: realm_discover_results
+  changed_when: false
+  tags: ad_join_pre_check
+
+- name: Discover realm debug
+  ansible.builtin.debug:
+    msg: "{{ realm_discover_results.stdout }}"
+
+- name: Create kerberos ticket
+  ansible.builtin.expect:
+    command: /bin/bash -c "/usr/bin/kinit -V {{ ad_admin_username }}"
+    responses:
+      (?i)Password: "{{ ad_admin_password }}"
+  changed_when: false
+  tags: ad_join_kerberos_auth
+
+- name: Checking to see if system is already joined to AD
+  ansible.builtin.command: /bin/bash -c "/usr/sbin/realm list"
+  register: realm_list_results
+  changed_when: false
+  tags: ad_join_existing_check
+
+- name: Debug realm_list_results
+  ansible.builtin.debug:
+    msg: "{{ realm_list_results.stdout }}"
+
+- name: Join system to AD
+  ansible.builtin.expect:
+    command: /bin/bash -c "/usr/sbin/realm join {{ ad_realm }} --computer-ou='{{ ad_ou }}' --user={{ ad_admin_username }}"
+    responses:
+      (?i)Password: "{{ ad_admin_password }}"
+  failed_when: false
+  notify: Restart ODDJOBD
+  when: not realm_list_results.stdout
+  tags: ad_join_add
+
+- name: Enabling oddjobd service
+  ansible.builtin.systemd:
+    name: oddjobd.service
+    enabled: true
+    state: started
