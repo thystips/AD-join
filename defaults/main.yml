@@ -17,6 +17,7 @@ ad_default_shell: "/usr/bin/bash"
 ad_home_dir: "/home/%u"
 
 ad_replace_sss_conf: false
+ad_reboot_if_require: true
 
 ad_config_ssh: true
 ad_ssh_display_motd: false

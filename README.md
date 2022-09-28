@@ -18,6 +18,7 @@ Role Variables
 * **ad_default_shell**: Default shell for AD users
 * **ad_home_dir**: Default home directory for AD users
 * **ad_replace_sss_conf**: Replace all `/etc/pam.d/common-session` file or juste add required line to it
+* **ad_reboot_if_require**: Reboot when host is joined to AD if necessary
 * **ad_config_ssh**: Enable or disable SSH config
 * **ad_ssh_display_motd**: Enable MOTD on ssh connexion
 * **ad_ssh_banner**: Enable SSH banner
